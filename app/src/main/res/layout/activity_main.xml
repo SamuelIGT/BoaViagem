@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#333333">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_screen_title"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="50dp"
+        android:paddingTop="50dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp">
+
+        <Button
+            android:id="@+id/btn_novo_gasto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/btn_novo_gasto"
+            android:textColor="@color/textWhite"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/novo_gasto"
+            android:onClick="newCost"/>
+
+        <Button
+            android:id="@+id/btn_nova_viagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/btn_nova_viagem"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/nova_viagem"
+            android:onClick="newTrip"/>
+
+        <Button
+            android:id="@+id/btn_minhas_viagens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/btn_minhas_viajens"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/minhas_viagens"
+            />
+
+        <Button
+            android:id="@+id/btn_config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/btn_configura_oes"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/configuracoes"
+            android:onClick="myTravels"/>
+    </RelativeLayout>
+
+</LinearLayout>

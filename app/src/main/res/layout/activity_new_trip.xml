@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:id="@+id/txt_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Destino" />
+
+    <EditText
+        android:id="@+id/editTxt_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_destination"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/txt_tripType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTxt_destination"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+
+        android:text="Tipo da Viagem" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_tripType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_tripType"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lazer" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Negócios" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txt_arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/radioGroup_tripType"
+        android:textSize="15sp"
+        android:text="Data de Chegada" />
+
+    <TextView
+        android:id="@+id/txt_departure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingEnd="12dp"
+        android:layout_below="@+id/radioGroup_tripType"
+        android:layout_alignParentEnd="true"
+        android:textSize="15sp"
+        android:text="Data de Saída" />
+
+    <Button
+        android:id="@+id/btn_arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_arrival"
+        android:onClick="showArrivalDateDialog"
+        android:text="Selecione"/>
+
+    <Button
+        android:id="@+id/btn_departure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txt_departure"
+        android:layout_below="@+id/txt_departure"
+        android:onClick="showDepartureDateDialog"
+        android:text="Selecione"/>
+
+    <TextView
+        android:id="@+id/txt_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/btn_arrival"
+        android:text="Orçamento" />
+
+    <EditText
+        android:id="@+id/editTxt_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_budget"
+        android:inputType="number" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/editTxt_budget"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:id="@+id/txt_amount_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="18dp"
+        android:text="Quantidade de Pessoas" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:layout_weight="1" />
+
+</LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#FFFFFF"
+        android:text="Criar Nova Viagem"
+        android:background="@color/colorAccent" />
+</RelativeLayout>
