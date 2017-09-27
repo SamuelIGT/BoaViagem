@@ -8,7 +8,7 @@
     <string name="btn_nova_viagem">Nova Viagem</string>
     <string name="btn_minhas_viajens">Minhas Viajens</string>
     <string name="btn_configura_oes">Configuraçoes</string>
-
+    <string name="show_total_spend">R$ %1$d</string>
     <string-array name="category_cost">
         <item>Alimentação</item>
         <item>Combustível</item>

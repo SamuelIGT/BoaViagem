@@ -21,7 +21,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".NewTripActivity" />
         <activity android:name=".NewCostActivity" />
-        <activity android:name=".MyTravelsActivity"></activity>
+        <activity android:name=".MyTravelsActivity" />
+        <activity android:name=".ExpensesListActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="@style/TripOptionsDialog">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="10dp"
+        android:background="@color/fullBlack"
+        android:textColor="@color/textWhite"
+        android:text="Opçoes"/>
+
+    <TextView
+        android:id="@+id/txt_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="10dp"
+        android:text="Editar"/>
+
+    <TextView
+        android:id="@+id/txt_newCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="10dp"
+        android:text="Novo Gasto"/>
+
+    <TextView
+        android:id="@+id/txt_myExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:text="Gastos Realizados"/>
+
+    <TextView
+        android:id="@+id/txt_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:text="Remover"
+        />
+
+</LinearLayout>
