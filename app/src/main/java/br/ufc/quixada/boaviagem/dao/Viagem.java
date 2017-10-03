@@ -1,5 +1,7 @@
 package br.ufc.quixada.boaviagem.dao;
 
+import java.util.List;
+
 /**
  * Created by samue on 25/09/2017.
  */
@@ -10,6 +12,7 @@ public class Viagem {
     private String duration;
     private double totalSpend;
     private int thumbnail;
+    private List<Cost> expenses;
 
     public Viagem(String destination, String duration, double totalSpend, int thumbnail) {
         this.destination = destination;
@@ -56,5 +59,18 @@ public class Viagem {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void addCost(Cost cost){
+        expenses.add(cost);
+    }
+    public boolean removeCost(int id){
+        for(Cost cost: expenses){
+            if(cost.getId() == id){
+                expenses.remove(cost);
+                return true;
+            }
+        }
+        return false;
     }
 }

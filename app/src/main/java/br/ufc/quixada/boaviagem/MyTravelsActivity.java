@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,13 +21,13 @@ import br.ufc.quixada.boaviagem.dao.Viagem;
 
 public class MyTravelsActivity extends AppCompatActivity {
     private ListView listViewTravels;
+    private List<Viagem> travels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_travels);
-        List<Viagem> travels = new ArrayList<>();
+        travels = new ArrayList<>();
         listViewTravels = (ListView) findViewById(R.id.listView_Travels);
-
         populateList(travels);
         ListViewCustomAdapter adapter = new ListViewCustomAdapter(travels, this);
         listViewTravels.setAdapter(adapter);
@@ -42,7 +43,7 @@ public class MyTravelsActivity extends AppCompatActivity {
         });
     }
 
-    private void showOptionsDialog(Context context, int iemPosition){
+    private void showOptionsDialog(Context context, final int iemPosition){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
         final View mView = getLayoutInflater().inflate(R.layout.dialog_my_travels_options, null);
 
@@ -62,13 +63,17 @@ public class MyTravelsActivity extends AppCompatActivity {
         myExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MyTravelsActivity.this, ExpensesListActivity.class);
+
+                startActivity(intent);
             }
         });
 
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                travels.remove(iemPosition);
+                ((BaseAdapter)listViewTravels.getAdapter()).notifyDataSetChanged();
             }
             
         });
