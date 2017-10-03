@@ -1,24 +1,25 @@
 package br.ufc.quixada.boaviagem.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by samue on 25/09/2017.
  */
 
-public class Viagem {
+public class Viagem implements Serializable {
     private int id;
     private String destination;
     private String duration;
     private double totalSpend;
-    private int thumbnail;
     private List<Cost> expenses;
+    private boolean isBusiness;
 
-    public Viagem(String destination, String duration, double totalSpend, int thumbnail) {
+    public Viagem(String destination, String duration, double totalSpend, boolean isBusiness) {
         this.destination = destination;
         this.duration = duration;
         this.totalSpend = totalSpend;
-        this.thumbnail = thumbnail;
+        this.isBusiness = isBusiness;
     }
 
     public String getDestination() {
@@ -45,14 +46,6 @@ public class Viagem {
         this.totalSpend = totalSpend;
     }
 
-    public int getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(int thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     public int getId() {
         return id;
     }
@@ -72,5 +65,13 @@ public class Viagem {
             }
         }
         return false;
+    }
+
+    public boolean isBusiness() {
+        return isBusiness;
+    }
+
+    public void setBusiness(boolean business) {
+        isBusiness = business;
     }
 }

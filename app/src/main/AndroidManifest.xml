@@ -22,7 +22,8 @@
         <activity android:name=".NewTripActivity" />
         <activity android:name=".NewCostActivity" />
         <activity android:name=".MyTravelsActivity" />
-        <activity android:name=".ExpensesListActivity"></activity>
+        <activity android:name=".ExpensesListActivity" />
+        <activity android:name=".fragments.MyPreferencesActivity"/>
     </application>
 
 </manifest>

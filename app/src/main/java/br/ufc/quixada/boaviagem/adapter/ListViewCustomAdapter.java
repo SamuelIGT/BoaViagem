@@ -55,7 +55,13 @@ public class ListViewCustomAdapter extends BaseAdapter {
         TextView duration = (TextView) convertView.findViewById(R.id.txt_duration);
         TextView totalSpend = (TextView) convertView.findViewById(R.id.txt_totalSpend);
 
-        thumbnail.setImageResource(travel.getThumbnail());
+        if(travel.isBusiness()){
+            thumbnail.setImageResource(R.drawable.negocios);
+        }else{
+            thumbnail.setImageResource(R.drawable.lazer);
+        }
+
+
         title.setText(travel.getDestination());
         duration.setText(travel.getDuration());
         totalSpend.setText(context.getString(R.string.show_total_spend, travel.getTotalSpend()));

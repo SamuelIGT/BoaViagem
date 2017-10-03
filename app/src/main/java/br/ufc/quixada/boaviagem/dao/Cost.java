@@ -1,5 +1,6 @@
 package br.ufc.quixada.boaviagem.dao;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,7 +10,7 @@ import java.util.Date;
  * Created by samuel on 26/09/17.
  */
 
-public class Cost {
+public class Cost implements Serializable {
     private long id;
     private String category;
     private double amount;

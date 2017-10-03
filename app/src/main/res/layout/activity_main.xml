@@ -70,7 +70,7 @@
             android:textColor="@color/textWhite"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/configuracoes"
-            android:onClick="myTravels"/>
+            android:onClick="configuration"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import br.ufc.quixada.boaviagem.fragments.MyPreferencesActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     void myTravels(View view){
         Intent myTravel = new Intent(this, MyTravelsActivity.class);
         startActivity(myTravel);
+    }
+    void configuration(View view){
+        Intent config = new Intent(this, MyPreferencesActivity.class);
+        startActivity(config);
+
     }
 }
 

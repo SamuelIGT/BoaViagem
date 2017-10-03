@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="28sp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingStart="10dp"
         android:text="Editar"/>
 
@@ -32,8 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="28sp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingStart="10dp"
         android:text="Novo Gasto"/>
 
@@ -43,7 +43,9 @@
         android:layout_height="wrap_content"
         android:textSize="28sp"
         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:text="Gastos Realizados"/>
 
     <TextView
@@ -52,6 +54,8 @@
         android:layout_height="wrap_content"
         android:textSize="28sp"
         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="0dp"
         android:paddingStart="10dp"
         android:text="Remover"
         />

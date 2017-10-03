@@ -46,7 +46,7 @@ public class ExpensesListViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = (convertView != null) ? convertView : inflater.inflate(R.layout.custom_listview_item, null);
+        convertView = (convertView != null) ? convertView : inflater.inflate(R.layout.custom_listview_expenses, null);
         TextView costDate = (TextView) convertView.findViewById(R.id.txt_cost_date);
         TextView costTitle = (TextView) convertView.findViewById(R.id.txt_cost_title);
         TextView costAmount = (TextView) convertView.findViewById(R.id.txt_cost_amount);
