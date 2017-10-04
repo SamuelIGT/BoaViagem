@@ -117,6 +117,7 @@
         android:text="Quantidade de Pessoas" />
 
     <EditText
+        android:id="@+id/editTxt_people_amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -133,5 +134,6 @@
         android:layout_alignParentBottom="true"
         android:textColor="#FFFFFF"
         android:text="Criar Nova Viagem"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent"
+        android:onClick="createTravel"/>
 </RelativeLayout>

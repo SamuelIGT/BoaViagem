@@ -8,7 +8,7 @@
     <string name="btn_nova_viagem">Nova Viagem</string>
     <string name="btn_minhas_viajens">Minhas Viajens</string>
     <string name="btn_configura_oes">Configuraçoes</string>
-    <string name="show_total_spend">R$ %1$.2f</string>
+    <string name="show_total_spend">R$ %1$.3f</string>
     <string name="KEY_EDIT_TRIP">9083</string>
     <string name="txt_remove_confirmation_dialog">Deseja realmente remover a viagem?</string>
     <string name="preferences">Preferências</string>
@@ -19,6 +19,9 @@
     <string name="limit_value_title">Alerta de Gastos</string>
     <string name="travel_mode_preference">travel_mode</string>
     <string name="limit_value_preference">limit_value</string>
+    <string name="STORAGE_KEY_TRAVELS">1040612</string>
+    <string name="TRAVEL_TYPE_BUSINESS">Negócios</string>
+    <string name="INTENT_TRAVEL_EXPENSES_ID">32648</string>
     <string-array name="category_cost">
         <item>Alimentação</item>
         <item>Combustível</item>

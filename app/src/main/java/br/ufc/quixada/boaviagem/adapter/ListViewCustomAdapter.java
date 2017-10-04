@@ -1,7 +1,6 @@
 package br.ufc.quixada.boaviagem.adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class ListViewCustomAdapter extends BaseAdapter {
 
 
         title.setText(travel.getDestination());
-        duration.setText(travel.getDuration());
+        duration.setText(travel.getDepartureDateString()+" a "+travel.getArrivalDateString());
         totalSpend.setText(context.getString(R.string.show_total_spend, travel.getTotalSpend()));
         return convertView;
     }

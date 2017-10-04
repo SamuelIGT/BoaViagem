@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="br.ufc.quixada.boaviagem.ExpensesListActivity">
+    tools:context="br.ufc.quixada.boaviagem.activity.ExpensesListActivity">
 
     <ListView
         android:id="@+id/lstView_expenses"

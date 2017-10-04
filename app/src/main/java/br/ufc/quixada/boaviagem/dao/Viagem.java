@@ -1,6 +1,10 @@
 package br.ufc.quixada.boaviagem.dao;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,18 +12,25 @@ import java.util.List;
  */
 
 public class Viagem implements Serializable {
-    private int id;
+    private long id;
     private String destination;
-    private String duration;
     private double totalSpend;
     private List<Cost> expenses;
     private boolean isBusiness;
+    private Date arrivalDate;
+    private Date departureDate;
 
-    public Viagem(String destination, String duration, double totalSpend, boolean isBusiness) {
+    public Viagem(String destination, double totalSpend, boolean isBusiness, Date arrivalDate, Date departureDate) {
         this.destination = destination;
-        this.duration = duration;
         this.totalSpend = totalSpend;
         this.isBusiness = isBusiness;
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
+        expenses = new ArrayList<>();
+    }
+
+    public List<Cost> getExpenses() {
+        return expenses;
     }
 
     public String getDestination() {
@@ -30,13 +41,6 @@ public class Viagem implements Serializable {
         this.destination = destination;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
 
     public double getTotalSpend() {
         return totalSpend;
@@ -46,20 +50,27 @@ public class Viagem implements Serializable {
         this.totalSpend = totalSpend;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public void addCost(Cost cost){
+    public void addCost(Cost cost) {
+        long id = 1;
+        if (expenses.size() > 0) {
+            id = expenses.get(expenses.size()-1).getId() + 1;
+        }
+        cost.setId(id);
+
         expenses.add(cost);
     }
-    public boolean removeCost(int id){
-        for(Cost cost: expenses){
-            if(cost.getId() == id){
+
+    public boolean removeCost(int id) {
+        for (Cost cost : expenses) {
+            if (cost.getId() == id) {
                 expenses.remove(cost);
                 return true;
             }
@@ -73,5 +84,30 @@ public class Viagem implements Serializable {
 
     public void setBusiness(boolean business) {
         isBusiness = business;
+    }
+
+    public Date getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public String getDepartureDateString() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(getDepartureDate());
+    }
+    public String getArrivalDateString() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(getArrivalDate());
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 }

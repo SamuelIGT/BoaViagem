@@ -16,15 +16,12 @@ public class Cost implements Serializable {
     private double amount;
     private Date date;
     private String description;
-    private String local;
 
-    public Cost(long id, String category, double amount, Date date, String description, String local) {
-        this.id = id;
+    public Cost(String category, double amount, Date date, String description) {
         this.category = category;
         this.amount = amount;
         this.date = date;
         this.description = description;
-        this.local = local;
     }
 
     public String getCategory() {
@@ -57,14 +54,6 @@ public class Cost implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
     }
 
     public long getId() {

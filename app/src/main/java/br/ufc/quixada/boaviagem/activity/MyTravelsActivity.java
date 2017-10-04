@@ -1,4 +1,4 @@
-package br.ufc.quixada.boaviagem;
+package br.ufc.quixada.boaviagem.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,26 +12,31 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import br.ufc.quixada.boaviagem.R;
+import br.ufc.quixada.boaviagem.StorageController;
 import br.ufc.quixada.boaviagem.adapter.ListViewCustomAdapter;
 import br.ufc.quixada.boaviagem.dao.Viagem;
 
 public class MyTravelsActivity extends AppCompatActivity {
     private ListView listViewTravels;
     private List<Viagem> travels;
+    private StorageController storage = new StorageController();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_travels);
-        travels = new ArrayList<>();
+
+        populateList();
+
         listViewTravels = (ListView) findViewById(R.id.listView_Travels);
-        populateList(travels);
         ListViewCustomAdapter adapter = new ListViewCustomAdapter(travels, this);
         listViewTravels.setAdapter(adapter);
+
         setupList();
     }
 
@@ -69,8 +74,10 @@ public class MyTravelsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyTravelsActivity.this, ExpensesListActivity.class);
-                startActivity(intent);
+                intent.putExtra(getString(R.string.INTENT_TRAVEL_EXPENSES_ID), itemPosition);
                 finishAlert.dismiss();
+                startActivity(intent);
+
             }
         });
 
@@ -124,10 +131,10 @@ public class MyTravelsActivity extends AppCompatActivity {
         finishAlert.show();
     }
 
-    private void populateList(List<Viagem> travels){
-        Viagem a = new Viagem("Sao Paulo", "10/09/2017 a 14/09/2017", 300, true);
-        Viagem b = new Viagem("Fortaleza", "15/09/2017 a 24/09/2017", 400, false);
-        travels.add(a);
-        travels.add(b);
+    private void populateList(){
+        travels = storage.getTravels(getString(R.string.STORAGE_KEY_TRAVELS), this);
+        if(travels == null){
+            travels = new ArrayList<>();
+        }
     }
 }

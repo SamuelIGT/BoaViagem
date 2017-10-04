@@ -2,20 +2,14 @@ package br.ufc.quixada.boaviagem.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.text.format.DateFormat;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import java.util.Calendar;
-import java.util.Date;
 
-import br.ufc.quixada.boaviagem.NewCostActivity;
-import br.ufc.quixada.boaviagem.NewTripActivity;
+import br.ufc.quixada.boaviagem.activity.NewCostActivity;
+import br.ufc.quixada.boaviagem.activity.NewTripActivity;
 
 /**
  * Created by samue on 24/09/2017.

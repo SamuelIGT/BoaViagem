@@ -1,11 +1,11 @@
-package br.ufc.quixada.boaviagem;
+package br.ufc.quixada.boaviagem.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import br.ufc.quixada.boaviagem.fragments.MyPreferencesActivity;
+import br.ufc.quixada.boaviagem.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myTravel);
     }
     void configuration(View view){
-        Intent config = new Intent(this, MyPreferencesActivity.class);
+        Intent config = new Intent(this, ConfigurationActivity.class);
         startActivity(config);
 
     }
