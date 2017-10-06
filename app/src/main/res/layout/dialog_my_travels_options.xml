@@ -26,6 +26,10 @@
         android:paddingBottom="10dp"
         android:paddingStart="10dp"
         android:text="Editar"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccentSemiTransparent"></View>
 
     <TextView
         android:id="@+id/txt_newCost"
@@ -37,6 +41,11 @@
         android:paddingStart="10dp"
         android:text="Novo Gasto"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccentSemiTransparent"></View>
+
     <TextView
         android:id="@+id/txt_myExpenses"
         android:layout_width="match_parent"
@@ -47,6 +56,11 @@
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
         android:text="Gastos Realizados"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccentSemiTransparent"></View>
 
     <TextView
         android:id="@+id/txt_remove"

@@ -96,7 +96,7 @@
         android:layout_marginTop="15dp"
         android:textSize="18sp"
         android:layout_below="@+id/btn_arrival"
-        android:text="Orçamento" />
+        android:text="Orçamento (R$)" />
 
     <EditText
         android:id="@+id/editTxt_budget"

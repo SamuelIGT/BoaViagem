@@ -59,8 +59,8 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
         if (editTravelID >= 0){
             Viagem travelEdit = storage.getTravelById(getString(R.string.STORAGE_KEY_TRAVELS), this, editTravelID);
             destination.setText(travelEdit.getDestination());
-            budget.setText(getString(R.string.New_Travel_Budget_Field, travelEdit.getBudget()));
-            peopleAmount.setText(travelEdit.getNumberOfPeople());
+            budget.setText(travelEdit.getBudget()+"");
+            peopleAmount.setText(travelEdit.getNumberOfPeople()+"");
             arrivalDate.setText(travelEdit.getArrivalDateString());
             departureDate.setText(travelEdit.getDepartureDateString());
         }
