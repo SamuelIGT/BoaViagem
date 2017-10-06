@@ -1,5 +1,6 @@
 package br.ufc.quixada.boaviagem.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -99,7 +100,7 @@ public class MyTravelsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MyTravelsActivity.this, NewTripActivity.class);
                 intent.putExtra(getString(R.string.KEY_EDIT_TRIP), travels.get(itemPosition).getId());
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 finishAlert.dismiss();
             }
         });
@@ -121,7 +122,7 @@ public class MyTravelsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: Implementar animaçao de slide quando deletar.
                 travels.remove(itemPosition);
-                //TODO: salvar lista atualizada.
+                storage.updateTravels(getString(R.string.STORAGE_KEY_TRAVELS), MyTravelsActivity.this, travels);
                 ((BaseAdapter)listViewTravels.getAdapter()).notifyDataSetChanged();
                 finishAlert.dismiss();
             }
@@ -137,14 +138,6 @@ public class MyTravelsActivity extends AppCompatActivity {
         finishAlert.show();
     }
 
-    @Override
-    protected void onRestart() {
-        updateListView();
-        //TODO: Listview nao atualiza apos edita. Retornar Objeto para ser atualizado na lista daqui
-        Log.d("onRestart", "TRUE ");
-        super.onRestart();
-    }
-
     private void updateListView() {
         ((BaseAdapter)listViewTravels.getAdapter()).notifyDataSetChanged();
     }
@@ -153,6 +146,27 @@ public class MyTravelsActivity extends AppCompatActivity {
         travels = storage.getTravels(getString(R.string.STORAGE_KEY_TRAVELS), this);
         if(travels == null){
             travels = new ArrayList<>();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("result");
+                for(int i = 0; i < travels.size(); i++){
+                    if(travels.get(i).getId() == Long.parseLong(result)){
+                        Viagem updatedTravel = storage.getTravels(getString(R.string.STORAGE_KEY_TRAVELS), this).get(i);
+                        travels.get(i).update(updatedTravel);
+                        storage.updateTravels(getString(R.string.STORAGE_KEY_TRAVELS), this, travels);
+                        updateListView();
+                    }
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
         }
     }
 }

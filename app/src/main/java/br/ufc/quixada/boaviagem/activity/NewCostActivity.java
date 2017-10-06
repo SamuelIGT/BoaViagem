@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import br.ufc.quixada.boaviagem.R;
 import br.ufc.quixada.boaviagem.StorageController;
@@ -30,6 +32,7 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
     private Button done;
     private EditText amount;
     private EditText description;
+    private TextView noTravelsWarning;
 
     private ArrayAdapter<CharSequence> locations;
     private StorageController storage = new StorageController();
@@ -45,6 +48,9 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
         amount = (EditText) findViewById(R.id.editTxt_amount);
         description = (EditText) findViewById(R.id.editTxt_description);
 
+        noTravelsWarning = (TextView) findViewById(R.id.txt_newCost_acitivity_empty);
+
+
         setupSpinners();
     }
 
@@ -53,7 +59,12 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.category_cost, R.layout.spinner_item);
         category.setAdapter(categoryAdapter);
 
-        locations = new ArrayAdapter<CharSequence>(this, R.layout.spinner_item, storage.getTravelsUniqueTitle(getString(R.string.STORAGE_KEY_TRAVELS), NewCostActivity.this));
+        List<CharSequence> lovationsList = storage.getTravelsUniqueTitle(getString(R.string.STORAGE_KEY_TRAVELS), NewCostActivity.this);
+        if (lovationsList.size() == 0){
+            noTravelsWarning.setVisibility(View.VISIBLE);
+        }
+
+        locations = new ArrayAdapter<CharSequence>(this, R.layout.spinner_item, lovationsList);
         local.setAdapter(locations);
     }
 

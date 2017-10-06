@@ -8,8 +8,9 @@
         android:id="@+id/myTravels_thumbnail"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/lazer"/>
+        android:src="@drawable/ic_recreation"/>
 
     <TextView
         android:id="@+id/txt_title"

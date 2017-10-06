@@ -1,6 +1,8 @@
 package br.ufc.quixada.boaviagem.activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +56,15 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
     }
 
     private void setupConfirmation() {
+        if (editTravelID >= 0){
+            Viagem travelEdit = storage.getTravelById(getString(R.string.STORAGE_KEY_TRAVELS), this, editTravelID);
+            destination.setText(travelEdit.getDestination());
+            budget.setText(getString(R.string.New_Travel_Budget_Field, travelEdit.getBudget()));
+            peopleAmount.setText(travelEdit.getNumberOfPeople());
+            arrivalDate.setText(travelEdit.getArrivalDateString());
+            departureDate.setText(travelEdit.getDepartureDateString());
+        }
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +76,6 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
                 Date departure;
                 int amount;
 
-                //TODO: Nao permitir campos em branco.
                 destinationText = destination.getText().toString();
 
                 amount = (!peopleAmount.getText().toString().equals("")) ? Integer.parseInt(peopleAmount.getText().toString()) : 0;
@@ -99,6 +109,9 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
             Viagem travel = new Viagem(destinationText, budget, isBusiness, arrivalDate, departureDate, amount);
             long id = editTravelID;
             storage.editTravel(getString(R.string.STORAGE_KEY_TRAVELS), this, travel, id);
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", ""+id);
+            setResult(Activity.RESULT_OK,returnIntent);
             finish();
         }else{
             Toast toast = Toast.makeText(this, "Voce deixou algum campo vazio.", Toast.LENGTH_SHORT);

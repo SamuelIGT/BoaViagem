@@ -55,9 +55,9 @@ public class ListViewCustomAdapter extends BaseAdapter {
         TextView totalSpend = (TextView) convertView.findViewById(R.id.txt_totalSpend);
 
         if(travel.isBusiness()){
-            thumbnail.setImageResource(R.drawable.negocios);
+            thumbnail.setImageResource(R.drawable.ic_businessman);
         }else{
-            thumbnail.setImageResource(R.drawable.lazer);
+            thumbnail.setImageResource(R.drawable.ic_recreation);
         }
 
 

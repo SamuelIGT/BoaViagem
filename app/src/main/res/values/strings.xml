@@ -22,6 +22,9 @@
     <string name="STORAGE_KEY_TRAVELS">1040612</string>
     <string name="TRAVEL_TYPE_BUSINESS">Negócios</string>
     <string name="INTENT_TRAVEL_EXPENSES_ID">32648</string>
+    <string name="New_Travel_Budget_Field">R$ %1$.3f</string>
+
+
     <string-array name="category_cost">
         <item>Alimentação</item>
         <item>Combustível</item>

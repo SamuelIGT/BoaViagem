@@ -128,4 +128,15 @@ public class Viagem implements Serializable {
         return totalSpend;
     }
 
+    public void update(Viagem travel){
+        if(travel != null) {
+            setDestination(travel.getDestination());
+            setArrivalDate(travel.getArrivalDate());
+            setBudget(travel.getBudget());
+            setBusiness(travel.isBusiness());
+            setDepartureDate(travel.getDepartureDate());
+            setNumberOfPeople(travel.getNumberOfPeople());
+        }
+    }
+
 }

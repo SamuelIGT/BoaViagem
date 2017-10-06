@@ -50,38 +50,41 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/txt_arrival"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/radioGroup_tripType"
-        android:textSize="15sp"
-        android:text="Data de Chegada" />
-
-    <TextView
         android:id="@+id/txt_departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:paddingEnd="12dp"
         android:layout_below="@+id/radioGroup_tripType"
-        android:layout_alignParentEnd="true"
         android:textSize="15sp"
         android:text="Data de Saída" />
+
+    <TextView
+        android:id="@+id/txt_arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/radioGroup_tripType"
+        android:textSize="15sp"
+        android:text="Data de Chegada" />
 
     <Button
         android:id="@+id/btn_arrival"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_arrival"
+        android:layout_alignEnd="@+id/txt_arrival"
         android:onClick="showArrivalDateDialog"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/datepicker_shape"
         android:text="Selecione"/>
 
     <Button
         android:id="@+id/btn_departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txt_departure"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/datepicker_shape"
         android:layout_below="@+id/txt_departure"
         android:onClick="showDepartureDateDialog"
         android:text="Selecione"/>

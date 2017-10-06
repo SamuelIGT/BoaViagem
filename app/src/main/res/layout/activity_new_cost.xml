@@ -1,109 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.ufc.quixada.boaviagem.activity.NewCostActivity"
-    android:layout_marginTop="10dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    android:orientation="vertical">
+    tools:context="br.ufc.quixada.boaviagem.activity.NewCostActivity">
 
-    <TextView
-        android:id="@+id/txt_newCost_acitivity_empty"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Voce ainda não cadastrou nenhuma viagem."
-        android:textSize="22sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:visibility="gone"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Categoria"/>
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-    </Spinner>
-
-    <RelativeLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        tools:context="br.ufc.quixada.boaviagem.activity.NewCostActivity"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_cost"
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_newCost_acitivity_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Voce ainda não cadastrou nenhuma viagem."
+            android:paddingTop="100dp"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/ic_emoticon_nervous"
+            android:visibility="gone">
+            <requestFocus />
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
             android:textSize="20sp"
-            android:text="Valor"/>
+            android:text="Categoria"/>
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+        </Spinner>
+
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Valor"/>
+
+            <EditText
+                android:id="@+id/editTxt_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_cost"
+                android:inputType="numberDecimal"
+                />
+
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="0dp"
+                android:paddingEnd="25dp"
+                android:textAlignment="center"
+                android:layout_alignParentEnd="true"
+                android:text="Data"/>
+
+            <Button
+                android:id="@+id/btn_costDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_date"
+                android:onClick="showDatePickerDialog"
+                android:layout_alignEnd="@+id/txt_date"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/datepicker_shape"
+                android:text="Selecione"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingStart="10dp"
+            android:textSize="20sp"
+            android:text="Descrição"/>
 
         <EditText
-            android:id="@+id/editTxt_amount"
-            android:layout_width="wrap_content"
+            android:id="@+id/editTxt_description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_cost"
-            android:inputType="numberDecimal"
-            />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:inputType="text"/>
 
         <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:layout_marginTop="15dp"
             android:textSize="20sp"
-            android:paddingEnd="30dp"
-            android:layout_alignParentEnd="true"
-            android:text="Data"/>
+            android:text="Local"/>
+
+        <Spinner
+            android:id="@+id/spinner_local"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+
+            >
+        </Spinner>
 
         <Button
-            android:id="@+id/btn_costDate"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_done"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_date"
-            android:onClick="showDatePickerDialog"
-            android:layout_alignEnd="@+id/txt_date"
-            android:text="Selecione"/>
-
-    </RelativeLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:text="Descrição"/>
-
-    <EditText
-        android:id="@+id/editTxt_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:text="Local"/>
-
-    <Spinner
-        android:id="@+id/spinner_local"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-
-    <Button
-        android:id="@+id/btn_done"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="createNewCost"
-        android:text="PRONTO"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="createNewCost"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle=""
+            android:background="@drawable/button_shape"
+            android:text="PRONTO"/>
+    </LinearLayout>
 </LinearLayout>
+
+
+</ScrollView>

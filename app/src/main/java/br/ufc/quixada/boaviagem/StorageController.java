@@ -26,27 +26,29 @@ public class StorageController {
         jsonParser = new GsonBuilder().create();
     }
 
-    public List<Viagem> getTravels(String key, Context context){
+    public List<Viagem> getTravels(String key, Context context) {
         String serializedList;
         serializedList = storage.getDefaults(key, context);
 
-        if(serializedList != null){
-            Type viagemListType = new TypeToken<List<Viagem>>(){}.getType();
+        if (serializedList != null) {
+            Type viagemListType = new TypeToken<List<Viagem>>() {
+            }.getType();
             return jsonParser.fromJson(serializedList, viagemListType);
         }
         return null;
     }
-    public void saveTravel(String key, Context context, Viagem travel){
+
+    public void saveTravel(String key, Context context, Viagem travel) {
         List<Viagem> travels = getTravels(key, context);
         String serializedList;
 
         if (travels != null) {
             long id = 1;
             if (travels.size() > 0) {
-                id = travels.get(travels.size()-1).getId() + 1;
+                id = travels.get(travels.size() - 1).getId() + 1;
             }
             travel.setId(id);
-        }else{
+        } else {
             travels = new ArrayList<>();
         }
 
@@ -54,12 +56,13 @@ public class StorageController {
         serializedList = jsonParser.toJson(travels);
         storage.setDefaults(key, serializedList, context);
     }
-    public void editTravel(String key, Context context, Viagem travelEdited, long id){
+
+    public void editTravel(String key, Context context, Viagem travelEdited, long id) {
         List<Viagem> travels = getTravels(key, context);
         String serializedList;
 
-        for (Viagem travel: travels){
-            if(travel.getId() == id){
+        for (Viagem travel : travels) {
+            if (travel.getId() == id) {
                 travel.setDestination(travelEdited.getDestination());
                 travel.setBudget(travelEdited.getBudget());
                 travel.setBusiness(travelEdited.isBusiness());
@@ -73,27 +76,59 @@ public class StorageController {
         storage.setDefaults(key, serializedList, context);
     }
 
-    public List<CharSequence> getTravelsUniqueTitle(String key, Context context){
-        List<CharSequence> uniqueTiles =  new ArrayList<>();
+    public List<CharSequence> getTravelsUniqueTitle(String key, Context context) {
+        List<CharSequence> uniqueTiles = new ArrayList<>();
         List<Viagem> travels = getTravels(key, context);
-        if(travels != null) {
-            for (Viagem travel : travels){
-                uniqueTiles.add(travel.getDestination()+" - "+travel.getDepartureDateString());
+        if (travels != null) {
+            for (Viagem travel : travels) {
+                uniqueTiles.add(travel.getDestination() + " - " + travel.getDepartureDateString());
             }
         }
         return uniqueTiles;
     }
 
-    public void saveCostByTravelUniqueTitle(String key, Context context, Cost cost, String travelUniqueTile){
+    public void saveCostByTravelUniqueTitle(String key, Context context, Cost cost, String travelUniqueTile) {
         List<Viagem> travels = getTravels(key, context);
-        if(travels != null) {
+        if (travels != null) {
             for (Viagem travel : travels) {
-                String uniqueTitle = travel.getDestination()+" - "+travel.getDepartureDateString();
-                if(uniqueTitle.equals(travelUniqueTile)){
+                String uniqueTitle = travel.getDestination() + " - " + travel.getDepartureDateString();
+                if (uniqueTitle.equals(travelUniqueTile)) {
                     travel.addCost(cost);
                 }
             }
             String serializedList = jsonParser.toJson(travels);
+            storage.setDefaults(key, serializedList, context);
+        }
+    }
+
+    public Viagem getTravelById(String key, Context context, long id) {
+        List<Viagem> travels = getTravels(key, context);
+        if (travels != null) {
+            for (Viagem travel : travels) {
+                if (travel.getId() == id) {
+                    return travel;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void removeTravelById(String key, Context context, long id) {
+        List<Viagem> travels = getTravels(key, context);
+        if (travels != null) {
+            for (int i = 0; i < travels.size(); i++) {
+                if (travels.get(i).getId() == id) {
+                    travels.remove(i);
+                }
+            }
+        }
+        updateTravels(key, context, travels);
+    }
+
+    public void updateTravels(String key, Context context, List<Viagem> travels) {
+        String serializedList;
+        if (travels != null) {
+            serializedList = jsonParser.toJson(travels);
             storage.setDefaults(key, serializedList, context);
         }
     }

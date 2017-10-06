@@ -54,7 +54,7 @@ public class ExpensesListViewAdapter extends BaseAdapter{
         Cost cost = expenses.get(position);
         costDate.setText(cost.getStringDate());
         costTitle.setText(cost.getDescription());
-        costAmount.setText("R$"+cost.getAmount());
+        costAmount.setText(context.getString(R.string.New_Travel_Budget_Field, cost.getAmount()));
 
         return convertView;
     }
