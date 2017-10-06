@@ -1,7 +1,6 @@
 package br.ufc.quixada.boaviagem.dao;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,18 +13,20 @@ import java.util.List;
 public class Viagem implements Serializable {
     private long id;
     private String destination;
-    private double totalSpend;
+    private double budget;
+    private int numberOfPeople;
     private List<Cost> expenses;
     private boolean isBusiness;
     private Date arrivalDate;
     private Date departureDate;
 
-    public Viagem(String destination, double totalSpend, boolean isBusiness, Date arrivalDate, Date departureDate) {
+    public Viagem(String destination, double budget, boolean isBusiness, Date arrivalDate, Date departureDate, int numberOfPeople) {
         this.destination = destination;
-        this.totalSpend = totalSpend;
+        this.budget = budget;
         this.isBusiness = isBusiness;
         this.arrivalDate = arrivalDate;
         this.departureDate = departureDate;
+        this.numberOfPeople = numberOfPeople;
         expenses = new ArrayList<>();
     }
 
@@ -42,12 +43,12 @@ public class Viagem implements Serializable {
     }
 
 
-    public double getTotalSpend() {
-        return totalSpend;
+    public double getBudget() {
+        return budget;
     }
 
-    public void setTotalSpend(double totalSpend) {
-        this.totalSpend = totalSpend;
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 
     public long getId() {
@@ -110,4 +111,21 @@ public class Viagem implements Serializable {
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
+
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    public double getTotalSpend(){
+        double totalSpend = 0;
+        for(Cost cost: expenses){
+            totalSpend += cost.getAmount();
+        }
+        return totalSpend;
+    }
+
 }

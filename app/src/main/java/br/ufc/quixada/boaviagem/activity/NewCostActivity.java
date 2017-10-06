@@ -67,11 +67,11 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
 
     public void createNewCost(View view) {
         String uniqueTitle = "";
-        uniqueTitle = (local.getSelectedItem() != null) ? local.getSelectedItem().toString(): uniqueTitle;
+        uniqueTitle = (local.getSelectedItem() != null) ? local.getSelectedItem().toString() : uniqueTitle;
 
         if (!uniqueTitle.equals("")) {
             String costType = category.getSelectedItem().toString();
-            double amountValue = Double.parseDouble(amount.getText().toString());
+            double amountValue = (!amount.getText().toString().equals("")) ? Double.parseDouble(amount.getText().toString()) : 0;
             String descriptionValue = description.getText().toString();
 
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -82,17 +82,21 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
                 e.printStackTrace();
                 date = Calendar.getInstance().getTime();
             }
-
-            Cost cost = new Cost(costType, amountValue, date, descriptionValue);
-
-            storage.saveCostByTravelUniqueTitle(getString(R.string.STORAGE_KEY_TRAVELS), this, cost, uniqueTitle);
-            finish();
-        }else{
-            Toast toast = Toast.makeText(this,"Nenhuma Viagem Cadastrada", Toast.LENGTH_SHORT);
+            if (amountValue > 0) {
+                Cost cost = new Cost(costType, amountValue, date, descriptionValue);
+                storage.saveCostByTravelUniqueTitle(getString(R.string.STORAGE_KEY_TRAVELS), this, cost, uniqueTitle);
+                finish();
+            }else {
+                Toast toast = Toast.makeText(this, "Voce deixou algum campo vazio.", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+        else{
+            Toast toast = Toast.makeText(this, "Nenhuma Viagem Cadastrada", Toast.LENGTH_SHORT);
             toast.show();
 
         }
-    }
+}
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {

@@ -54,6 +54,24 @@ public class StorageController {
         serializedList = jsonParser.toJson(travels);
         storage.setDefaults(key, serializedList, context);
     }
+    public void editTravel(String key, Context context, Viagem travelEdited, long id){
+        List<Viagem> travels = getTravels(key, context);
+        String serializedList;
+
+        for (Viagem travel: travels){
+            if(travel.getId() == id){
+                travel.setDestination(travelEdited.getDestination());
+                travel.setBudget(travelEdited.getBudget());
+                travel.setBusiness(travelEdited.isBusiness());
+                travel.setArrivalDate(travelEdited.getArrivalDate());
+                travel.setDepartureDate(travelEdited.getDepartureDate());
+                travel.setNumberOfPeople(travelEdited.getNumberOfPeople());
+            }
+        }
+
+        serializedList = jsonParser.toJson(travels);
+        storage.setDefaults(key, serializedList, context);
+    }
 
     public List<CharSequence> getTravelsUniqueTitle(String key, Context context){
         List<CharSequence> uniqueTiles =  new ArrayList<>();

@@ -63,7 +63,12 @@ public class ListViewCustomAdapter extends BaseAdapter {
 
         title.setText(travel.getDestination());
         duration.setText(travel.getDepartureDateString()+" a "+travel.getArrivalDateString());
-        totalSpend.setText(context.getString(R.string.show_total_spend, travel.getTotalSpend()));
+        if (travel.getExpenses().size() == 0){
+            totalSpend.setText(context.getString(R.string.show_total_spend, travel.getBudget()));
+        }else{
+            totalSpend.setText(context.getString(R.string.show_total_spend, travel.getTotalSpend()));
+        }
+
         return convertView;
     }
 }

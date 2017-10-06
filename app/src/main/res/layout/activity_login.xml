@@ -5,23 +5,28 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/logo" />
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:src="@drawable/ic_airplane" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="16sp"
         android:text="Usuário" />
 
     <EditText
         android:id="@+id/usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:inputType="text">
-
         <requestFocus />
 
     </EditText>
@@ -29,12 +34,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="16sp"
         android:text="Senha" />
 
     <EditText
         android:id="@+id/senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="16sp"
         android:inputType="textPassword" />
 
     <Button
@@ -42,5 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:src="@drawable/button_shape"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:clickable="true"
         android:text="ENTRAR" />
 </LinearLayout>

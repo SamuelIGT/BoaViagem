@@ -2,9 +2,9 @@ package br.ufc.quixada.boaviagem.activity;
 
 import android.app.DatePickerDialog;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -32,7 +32,9 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
     private RadioGroup travelType;
     private EditText budget;
     private EditText peopleAmount;
+    private Button confirm;
     private StorageController storage = new StorageController();
+    private long editTravelID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,61 +47,118 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
         this.peopleAmount = (EditText) findViewById(R.id.editTxt_people_amount);
         this.arrivalDate = (Button) findViewById(R.id.btn_arrival);
         this.departureDate = (Button) findViewById(R.id.btn_departure);
+        this.confirm = (Button) findViewById(R.id.btn_new_travel_confirm);
+
+        editTravelID = getIntent().getLongExtra(getString(R.string.KEY_EDIT_TRIP), -1);
+        setupConfirmation();
     }
 
-    public void createTravel(View view){
-        String destinationText;
-        double totalSpend;
-        boolean isBusiness;
-        Date arrivalDate;
-        Date departureDate;
-        int amount;
+    private void setupConfirmation() {
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        destinationText = this.destination.getText().toString();
-        amount = Integer.parseInt(this.peopleAmount.getText().toString());
+                String destinationText;
+                double totalSpend;
+                boolean isBusiness;
+                Date arrival;
+                Date departure;
+                int amount;
 
-        totalSpend = Double.parseDouble(budget.getText().toString());
-        isBusiness = isBusinessChecked(travelType);
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            arrivalDate = df.parse(this.arrivalDate.getText().toString());
-            departureDate = df.parse(this.departureDate.getText().toString());
-        } catch (ParseException e) {
-            arrivalDate = Calendar.getInstance().getTime();
-            departureDate = Calendar.getInstance().getTime();
-            e.printStackTrace();
+                //TODO: Nao permitir campos em branco.
+                destinationText = destination.getText().toString();
+
+                amount = (!peopleAmount.getText().toString().equals("")) ? Integer.parseInt(peopleAmount.getText().toString()) : 0;
+
+                totalSpend = (!budget.getText().toString().equals("")) ? Double.parseDouble(budget.getText().toString()) : 0;
+                isBusiness = isBusinessChecked(travelType);
+
+                //TODO: Data de chegada deve ser maior que a de saida.
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    arrival = df.parse(arrivalDate.getText().toString());
+                    departure = df.parse(departureDate.getText().toString());
+                } catch (ParseException e) {
+                    arrival = Calendar.getInstance().getTime();
+                    departure = Calendar.getInstance().getTime();
+                    e.printStackTrace();
+                }
+
+                if (editTravelID >= 0) {
+                    Log.d("ExtraEDIT", ""+editTravelID);
+                    editTravel(destinationText, totalSpend, isBusiness, arrival, departure, amount);
+                } else {
+                    createTravel(destinationText, totalSpend, isBusiness, arrival, departure, amount);
+                }
+            }
+        });
+    }
+
+    private void editTravel(String destinationText, double budget, boolean isBusiness, Date arrivalDate, Date departureDate, int amount) {
+        if(validateData(destinationText, budget, isBusiness, arrivalDate, departureDate, amount)) {
+            Viagem travel = new Viagem(destinationText, budget, isBusiness, arrivalDate, departureDate, amount);
+            long id = editTravelID;
+            storage.editTravel(getString(R.string.STORAGE_KEY_TRAVELS), this, travel, id);
+            finish();
+        }else{
+            Toast toast = Toast.makeText(this, "Voce deixou algum campo vazio.", Toast.LENGTH_SHORT);
         }
 
-        Viagem travel = new Viagem(destinationText, totalSpend, isDepartureDate, arrivalDate, departureDate);
-
-        storage.saveTravel(getString(R.string.STORAGE_KEY_TRAVELS), this, travel);
-        finish();
     }
-    private boolean isBusinessChecked(RadioGroup radioGroup){
+
+    public void createTravel(String destinationText, double totalSpend, boolean isBusiness, Date arrivalDate, Date departureDate, int amountOfPeople) {
+        if(validateData(destinationText, totalSpend, isBusiness, arrivalDate, departureDate, amountOfPeople)){
+            Viagem travel = new Viagem(destinationText, totalSpend, isBusiness, arrivalDate, departureDate, amountOfPeople);
+            storage.saveTravel(getString(R.string.STORAGE_KEY_TRAVELS), this, travel);
+            finish();
+        }else{
+            Toast toast = Toast.makeText(this, "Voce deixou algum campo vazio.", Toast.LENGTH_SHORT);
+        }
+
+    }
+    public boolean validateData(String destinationText, double totalSpend, boolean isBusiness, Date arrivalDate, Date departureDate, int amountOfPeople){
+        if (destinationText.equals("")){
+            return false;
+        }
+        if (totalSpend == 0){
+            return false;
+        }
+        if(arrivalDate.getTime() < departureDate.getTime() ){
+            arrivalDate = departureDate;
+        }
+        if (amountOfPeople == 0){
+            return false;
+        }
+        return true;
+
+    }
+
+    private boolean isBusinessChecked(RadioGroup radioGroup) {
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
         View radioButton = radioGroup.findViewById(radioButtonID);
         int idx = radioGroup.indexOfChild(radioButton);
 
-        RadioButton r = (RadioButton)  radioGroup.getChildAt(idx);
-        if(r != null){
-            if(r.getText().toString().equals(getString(R.string.TRAVEL_TYPE_BUSINESS))){
+        RadioButton r = (RadioButton) radioGroup.getChildAt(idx);
+        if (r != null) {
+            if (r.getText().toString().equals(getString(R.string.TRAVEL_TYPE_BUSINESS))) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else{
-            Toast toast = Toast.makeText(this,"Nenhum tipo de viagem cadastrada!", Toast.LENGTH_SHORT);
+        } else {
+            Toast toast = Toast.makeText(this, "Nenhum tipo de viagem cadastrada!", Toast.LENGTH_SHORT);
             toast.show();
             return false;
         }
 
     }
 
-    public void showArrivalDateDialog(View v){
+    public void showArrivalDateDialog(View v) {
         isDepartureDate = false;
         showDatePickerDialog();
     }
-    public void showDepartureDateDialog(View v){
+
+    public void showDepartureDateDialog(View v) {
         isDepartureDate = true;
         showDatePickerDialog();
     }
@@ -116,10 +175,10 @@ public class NewTripActivity extends AppCompatActivity implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Date data = createDate(year, month, day);
-        if(isDepartureDate){
-            departureDate.setText(day+"/"+month+"/"+year);
-        }else
-            arrivalDate.setText(day+"/"+month+"/"+year);
+        if (isDepartureDate) {
+            departureDate.setText(day + "/" + month + "/" + year);
+        } else
+            arrivalDate.setText(day + "/" + month + "/" + year);
 
     }
 

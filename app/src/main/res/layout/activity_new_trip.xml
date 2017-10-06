@@ -129,11 +129,12 @@
 </LinearLayout>
 
     <Button
+        android:id="@+id/btn_new_travel_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:textColor="#FFFFFF"
         android:text="Criar Nova Viagem"
         android:background="@color/colorAccent"
-        android:onClick="createTravel"/>
+        />
 </RelativeLayout>

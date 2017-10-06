@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -35,7 +37,9 @@ public class MyTravelsActivity extends AppCompatActivity {
 
         listViewTravels = (ListView) findViewById(R.id.listView_Travels);
         ListViewCustomAdapter adapter = new ListViewCustomAdapter(travels, this);
+
         listViewTravels.setAdapter(adapter);
+        listViewTravels.setEmptyView(findViewById(R.id.txt_empty_listview));
 
         setupList();
     }
@@ -94,7 +98,7 @@ public class MyTravelsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyTravelsActivity.this, NewTripActivity.class);
-                intent.putExtra(getString(R.string.KEY_EDIT_TRIP), travels.get(itemPosition));
+                intent.putExtra(getString(R.string.KEY_EDIT_TRIP), travels.get(itemPosition).getId());
                 startActivity(intent);
                 finishAlert.dismiss();
             }
@@ -115,7 +119,9 @@ public class MyTravelsActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: Implementar animaçao de slide quando deletar.
                 travels.remove(itemPosition);
+                //TODO: salvar lista atualizada.
                 ((BaseAdapter)listViewTravels.getAdapter()).notifyDataSetChanged();
                 finishAlert.dismiss();
             }
@@ -129,6 +135,18 @@ public class MyTravelsActivity extends AppCompatActivity {
         });
 
         finishAlert.show();
+    }
+
+    @Override
+    protected void onRestart() {
+        updateListView();
+        //TODO: Listview nao atualiza apos edita. Retornar Objeto para ser atualizado na lista daqui
+        Log.d("onRestart", "TRUE ");
+        super.onRestart();
+    }
+
+    private void updateListView() {
+        ((BaseAdapter)listViewTravels.getAdapter()).notifyDataSetChanged();
     }
 
     private void populateList(){

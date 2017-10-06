@@ -29,6 +29,7 @@ public class ExpensesListActivity extends AppCompatActivity {
         this.expensesListView = (ListView) findViewById(R.id.lstView_expenses);
         ExpensesListViewAdapter adapter = new ExpensesListViewAdapter(expenses, this);
         expensesListView.setAdapter(adapter);
+        expensesListView.setEmptyView(findViewById(R.id.txt_expenses_empty_listview));
     }
 
     private void getExpenseList() {
